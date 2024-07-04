@@ -36,7 +36,7 @@ def get_logger() -> logging.Logger:
     """Create a logger for a csv file `user data`"""
     logger = logging.getLogger("user_data")
     streamHandler = logging.StreamHandler()
-    streamHandler.setFormatter()
+    streamHandler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.propagate = False
     logger.addHandler(streamHandler)
     return logger
