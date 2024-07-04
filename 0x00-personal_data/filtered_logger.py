@@ -24,5 +24,5 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        text = super().format(record)
+        text = super(RedactingFormatter, self).format(record)
         return filter_datum(self.fields, self.REDACTION, text, self.SEPARATOR)
