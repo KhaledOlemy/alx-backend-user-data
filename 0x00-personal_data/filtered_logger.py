@@ -27,3 +27,16 @@ class RedactingFormatter(logging.Formatter):
         """Format text to escape fields"""
         text = super().format(record)
         return filter_datum(self.fields, self.REDACTION, text, self.SEPARATOR)
+
+
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
+def get_logger() -> logging.Logger:
+    """Create a logger for a csv file `user data`"""
+    logger = logging.getLogger("user_data")
+    streamHandler = logging.StreamHandler()
+    streamHandler.setFormatter()
+    logger.propagate = False
+    logger.addHandler(streamHandler)
+    return logger
