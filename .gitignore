@@ -4,3 +4,4 @@ main.py
 *.pyc
 __pycache__
 authProjVenv/
+main_*.py
