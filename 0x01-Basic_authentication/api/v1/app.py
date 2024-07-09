@@ -27,6 +27,12 @@ def unauthorized_man(error) -> str:
     return jsonify({"error": "Unauthorized"}), 401
 
 
+@app.errorhandler(403)
+def forbidden_man(error) -> str:
+    """Block forbidden requests with a JSON"""
+    return jsonify({"error": "Forbidden"}), 403
+
+
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")

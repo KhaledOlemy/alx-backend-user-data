@@ -33,3 +33,12 @@ def getout() -> str:
       - give an unauthorized message
     """
     abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden_how_did_you_get_to_here() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+      - give an forbidden message 403
+    """
+    abort(403)
