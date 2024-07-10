@@ -57,8 +57,6 @@ class BasicAuth(Auth):
         if not User.search({"email": user_email}):
             return None
         shortlisted_users = User.search({"email": user_email})
-        if not shortlisted_users:
-            return None
-        if not shortlisted_users[0].is_valid_password(user_pwd):
-            return None
-        return shortlisted_users[0]
+        if shortlisted_users[0].is_valid_password(user_pwd):
+            return shortlisted_users[0]
+        return None
