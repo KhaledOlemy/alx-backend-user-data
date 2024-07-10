@@ -9,4 +9,7 @@ from api.v1.auth.auth import Auth
 
 
 class BasicAuth(Auth):
+    """Basic authentication system
+    decided by env vars
+    """
     pass
