@@ -25,6 +25,8 @@ if os.getenv("AUTH_TYPE") == 'auth':
 
 @app.before_request
 def handle_authorization() -> str:
+    """Handle authorization before any request
+    """
     if not auth:
         return
     if not auth.require_auth(excluded_paths=excluded_paths, path=request.path):
