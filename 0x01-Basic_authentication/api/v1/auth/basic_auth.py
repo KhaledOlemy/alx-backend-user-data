@@ -52,12 +52,15 @@ class BasicAuth(Auth):
     def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):  # noqa # type: ignore
         """Get user from email and password in authorization header
         """
-        if type(user_email) is not str or type(user_pwd) is not str:
+        try:
+            if type(user_email) is not str or type(user_pwd) is not str:
+                return None
+            target_users = User.search({"email": user_email})
+            if not target_users:
+                return None
+            target_user = target_users[0]
+            if not target_user.is_valid_password(user_pwd):
+                return None
+            return target_user
+        except Exception:
             return None
-        target_users = User.search({"email": user_email})
-        if not target_users:
-            return None
-        target_user = target_users[0]
-        if not target_user.is_valid_password(user_pwd):
-            return None
-        return target_user
