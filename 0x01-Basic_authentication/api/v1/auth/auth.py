@@ -17,7 +17,7 @@ class Auth:
         """
         if not path or not excluded_paths:
             return True
-        if [p for p in excluded_paths if p.startswith(path)]:
+        if [p for p in excluded_paths if path.startswith(p.replace('*', ''))]:
             return False
         return True
 
