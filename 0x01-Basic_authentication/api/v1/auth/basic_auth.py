@@ -49,7 +49,7 @@ class BasicAuth(Auth):
             return (None, None)
         user_part = decoded_base64_authorization_header.split(':')[0]
         pass_part = ':'.join(decoded_base64_authorization_header.split(':')[1:])  # noqa
-        return tuple(user_part, pass_part)
+        return (user_part, pass_part)
 
     def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):  # noqa # type: ignore
         """Get user from email and password in authorization header
@@ -77,5 +77,6 @@ class BasicAuth(Auth):
             user_email, user_password = self.extract_user_credentials(base64_decoded)  # noqa
             target_user = self.user_object_from_credentials(user_email, user_password)  # noqa
             return target_user
-        except Exception:
+        except Exception as e:
+            print(e)
             return None
