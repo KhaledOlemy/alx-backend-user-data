@@ -64,3 +64,16 @@ class BasicAuth(Auth):
             return target_user
         except Exception:
             return None
+
+    def current_user(self, request=None) -> TypeVar('User'):  # noqa # type: ignore
+        """Overloads Auth, and retrieves user instance for a request
+        """
+        try:
+            auth_header = self.authorization_header(request)  # noqa
+            base64_part = self.extract_base64_authorization_header(auth_header)  # noqa
+            base64_decoded = self.decode_base64_authorization_header(base64_part)  # noqa
+            user_email, user_password = self.extract_user_credentials(base64_decoded)  # noqa
+            target_user = self.user_object_from_credentials(user_email, user_password)  # noqa
+            return target_user
+        except Exception:
+            return None
