@@ -41,4 +41,4 @@ class Auth:
         """get _my_session_id cookie value"""
         if not request:
             return None
-        return request.get(os.getenv('SESSION_NAME'))
+        return request.cookies.get(os.getenv('SESSION_NAME'))
