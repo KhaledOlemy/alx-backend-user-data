@@ -5,6 +5,7 @@ using headers (the basic one)
 """
 from flask import request
 from typing import List, TypeVar
+import os
 
 
 class Auth:
@@ -35,3 +36,9 @@ class Auth:
         """Get current used authenticated
         """
         return None
+
+    def session_cookie(self, request=None):
+        """get _my_session_id cookie value"""
+        if not request:
+            return None
+        return request.get(os.getenv('SESSION_NAME'))
