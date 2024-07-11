@@ -38,9 +38,7 @@ def handle_authorization() -> str:
         return
     if not auth.require_auth(excluded_paths=excluded_paths, path=request.path):
         return
-    if not auth.authorization_header(request):
-        abort(401)
-    if not auth.session_cookie(request):
+    if not auth.authorization_header(request) and not auth.session_cookie(request):  # noqa
         abort(401)
     if not auth.current_user(request):
         abort(403)
