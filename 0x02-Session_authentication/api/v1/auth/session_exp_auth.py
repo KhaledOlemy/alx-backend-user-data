@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 
 class SessionExpAuth(SessionAuth):
+    """Session with expiration date"""
     def __init__(self):
         """INIT a new instance of session w expiry"""
         super().__init__()
