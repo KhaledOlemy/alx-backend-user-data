@@ -27,3 +27,12 @@ def handle_login():
     out_user = jsonify(target_user.to_json())
     out_user.set_cookie(os.getenv('SESSION_NAME'), session_id)
     return out_user
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)  # noqa
+def handle_logout():
+    """Executes the logout operation"""
+    from api.v1.app import auth
+    if not auth.destroy_session(request):
+        abort(404)
+    return jsonify({}), 200
